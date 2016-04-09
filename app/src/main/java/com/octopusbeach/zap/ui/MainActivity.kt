@@ -9,11 +9,10 @@ import com.octopusbeach.zap.ZapApplication
 
 class MainActivity : AppCompatActivity() {
 
-    private val ref = Firebase(ZapApplication.FIREBASE_ROOT)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val ref = (application as ZapApplication).getRef()
         if (ref.auth == null) {
             startActivity(Intent(this, LoginActivity::class.java))
         }

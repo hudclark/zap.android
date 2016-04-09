@@ -11,8 +11,13 @@ class ZapApplication : Application() {
         val FIREBASE_ROOT = "https://zap-extension.firebaseio.com"
     }
 
+    private lateinit var ref:Firebase
+
     override fun onCreate() {
         super.onCreate()
         Firebase.setAndroidContext(this)
+        ref = Firebase(FIREBASE_ROOT)
     }
+
+    fun getRef() = ref
 }

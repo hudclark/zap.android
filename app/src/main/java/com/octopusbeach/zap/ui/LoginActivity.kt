@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         dialog.setMessage("Logging in...")
         dialog.show()
 
-        val ref: Firebase = Firebase(ZapApplication.FIREBASE_ROOT)
+        val ref = (application as ZapApplication).getRef()
         val handler: Firebase.AuthResultHandler = object : Firebase.AuthResultHandler {
             override fun onAuthenticated(authData: AuthData) {
                 val map = mutableMapOf("provider" to authData.provider)

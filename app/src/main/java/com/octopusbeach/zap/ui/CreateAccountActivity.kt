@@ -45,7 +45,7 @@ class CreateAccountActivity : AppCompatActivity() {
         dialog.setMessage("Creating Account...")
         dialog.show()
 
-        val ref: Firebase = Firebase(ZapApplication.FIREBASE_ROOT)
+        val ref: Firebase = (application as ZapApplication).getRef()
 
         val authHandler:Firebase.AuthResultHandler = object: Firebase.AuthResultHandler {
             override fun onAuthenticated(authData: AuthData) {
