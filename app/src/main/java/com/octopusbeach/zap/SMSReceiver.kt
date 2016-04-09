@@ -15,7 +15,9 @@ import java.util.*
  */
 
 class SMSReceiver : BroadcastReceiver() {
-    val SMS_ACTION = "android.provider.Telephony.SMS_RECEIVED"
+    companion object{
+        val SMS_ACTION = "android.provider.Telephony.SMS_RECEIVED"
+    }
     val ID_INDEX = 0
     val PHONE_LOOKUP = arrayOf(ContactsContract.PhoneLookup.DISPLAY_NAME)
 
