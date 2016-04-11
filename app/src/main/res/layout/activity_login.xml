@@ -11,31 +11,30 @@
         android:layout_width="fill_parent"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp">
 
 
-        <!--
         <ImageView
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="72dp"
             android:src="@drawable/logo"
             android:layout_width="wrap_content"
             android:layout_height="72dp" />
-            -->
 
         <android.support.design.widget.TextInputLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="126dp">
+            android:layout_marginTop="72dp">
 
             <EditText
                 android:id="@+id/email_field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
 
@@ -49,7 +48,7 @@
                 android:id="@+id/password_field"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
@@ -57,8 +56,10 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/primary_text_dark"
             android:layout_marginTop="24dp"
-            android:text="Login" />
+            android:text="@string/login" />
 
         <TextView
             android:id="@+id/create_account"
@@ -66,8 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:gravity="center_horizontal"
-            android:text="Don't have an account? Create One."
-            android:textSize="18dp" />
+            android:text="@string/no_account"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </ScrollView>

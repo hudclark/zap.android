@@ -7,4 +7,6 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="already">Already have an account? Login.</string>
+    <string name="login">Login</string>
+    <string name="no_account">Don\'t have an account? Create One.</string>
 </resources>

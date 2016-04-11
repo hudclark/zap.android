@@ -2,6 +2,7 @@ package com.octopusbeach.zap.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatButton
 import com.firebase.client.Firebase
@@ -11,7 +12,6 @@ import com.octopusbeach.zap.ZapApplication
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var btnConnect: AppCompatButton
     private lateinit var ref:Firebase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,12 +21,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
         setContentView(R.layout.activity_main)
-
-        btnConnect = findViewById(R.id.btn_connect) as AppCompatButton
+        findViewById(R.id.logout)?.setOnClickListener { logout() }
+        findViewById(R.id.btn_settings)?.setOnClickListener { openSettings() }
     }
 
-    private fun signOut() {
+    private fun logout() {
+        ref.unauth()
         stopService(Intent(this, NotificationService::class.java))
         startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+    private fun openSettings() {
+        startActivityForResult(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS), 0)
     }
 }

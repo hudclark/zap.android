@@ -9,10 +9,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.MainActivity">
 
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:src="@drawable/logo"
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp" />
+
+    <TextView
+        android:layout_below="@id/logo"
+        android:text="Download the Chrome Extension start getting notifications in your browser!"
+        android:layout_marginTop="72dp"
+        android:layout_width="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/description"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_connect"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="72dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/primary_text_dark"
+        android:id="@+id/btn_settings"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Enable Notification Access"/>
+
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp"
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textSize="18sp"
         android:text="@string/logout"/>
 
 </RelativeLayout>
