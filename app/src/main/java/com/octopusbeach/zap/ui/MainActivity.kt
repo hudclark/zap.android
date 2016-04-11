@@ -16,29 +16,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         ref = (application as ZapApplication).getRef()
         if (ref.auth == null) {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+        setContentView(R.layout.activity_main)
 
         btnConnect = findViewById(R.id.btn_connect) as AppCompatButton
-        btnConnect.setOnClickListener { toggleConnection() }
-    }
-
-    private fun toggleConnection() {
-        if (ref.auth == null) {
-            signOut()
-            return
-        }
-
-        if (btnConnect.text == getString(R.string.connect)) {
-            startService(Intent(this, NotificationService::class.java))
-            btnConnect.text = getString(R.string.disconnect)
-        } else if (btnConnect.text == getString(R.string.disconnect))  {
-            stopService(Intent(this, NotificationService::class.java))
-            btnConnect.text = getString(R.string.connect)
-        }
     }
 
     private fun signOut() {
