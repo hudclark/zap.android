@@ -9,4 +9,6 @@
     <string name="already">Already have an account? Login.</string>
     <string name="login">Login</string>
     <string name="no_account">Don\'t have an account? Create One.</string>
+    <string name="description">Download the Chrome Extension start getting notifications in your browser!</string>
+    <string name="get_access">Enable Notification Access</string>
 </resources>
