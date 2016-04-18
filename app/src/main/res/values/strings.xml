@@ -10,5 +10,9 @@
     <string name="login">Login</string>
     <string name="no_account">Don\'t have an account? Create One.</string>
     <string name="description">Download the Chrome Extension start getting notifications in your browser!</string>
-    <string name="get_access">Enable Notification Access</string>
+    <string name="get_access">Enable notification access for Zap</string>
+    <string name="notify_description">Without access, Zap can\'t push notifications to your computer.</string>
+    <string name="go_to_settings">Go to settings</string>
+    <string name="get_extension">Download the browser extension</string>
+    <string name="extension_description">Search for Zap on the Chrome Web Store and add it as an extension. Firefox support coming soon!</string>
 </resources>

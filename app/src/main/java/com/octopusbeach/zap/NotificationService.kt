@@ -28,9 +28,9 @@ class NotificationService : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         if (sbn == null) return
-        val note = sbn.notification
         if (sbn.packageName == ANDROID) return
-        if (note.sound == null && note.vibrate == null) return
+        val note = sbn.notification
+        if (note.sound == null && note.vibrate == null) return // don't mirror a silent notification
         val extras = note.extras
         val text = extras.get(TEXT).toString()
         val title = extras.getString(TITLE)
