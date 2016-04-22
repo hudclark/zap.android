@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Base64
+import android.util.Log
 import com.firebase.client.DataSnapshot
 import com.firebase.client.Firebase
 import com.firebase.client.FirebaseError
@@ -17,9 +18,10 @@ import java.io.ByteArrayOutputStream
  */
 class NotificationService : NotificationListenerService() {
     private lateinit var context: Context
-    val TITLE = "android.title"
-    val TEXT = "android.text"
-    val ANDROID = "android"
+    private val TITLE = "android.title"
+    private val TEXT = "android.text"
+    private val ANDROID = "android"
+    private val EMPTY_VIBRATE = longArrayOf(0)
 
     override fun onCreate() {
         super.onCreate()
@@ -30,7 +32,8 @@ class NotificationService : NotificationListenerService() {
         if (sbn == null) return
         if (sbn.packageName == ANDROID) return
         val note = sbn.notification
-        if (note.sound == null && note.vibrate == null) return // don't mirror a silent notification
+        // don't mirror a silent notification
+        if (note.sound == null && (note.vibrate == null || note.vibrate == EMPTY_VIBRATE)) return
         val extras = note.extras
         val text = extras.get(TEXT).toString()
         val title = extras.getString(TITLE)

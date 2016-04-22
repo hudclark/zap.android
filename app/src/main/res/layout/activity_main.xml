@@ -35,16 +35,13 @@
             </FrameLayout>
 
             <TextView
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp"
+                android:padding="16dp"
                 android:textColor="@android:color/primary_text_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/notify_description"/>
 
             <Button
-                android:layout_marginTop="24dp"
                 android:id="@+id/btn_settings"
                 android:padding="16dp"
                 android:layout_marginBottom="8dp"
@@ -85,6 +82,7 @@
                 android:textColor="@android:color/primary_text_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autoLink="web"
                 android:text="@string/extension_description"/>
 
         </LinearLayout>
@@ -94,14 +92,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.AppCompatButton
+        <Button
             android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
             android:textColor="@android:color/primary_text_dark"
             android:id="@+id/logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:text="@string/logout"/>
 
     </FrameLayout>
