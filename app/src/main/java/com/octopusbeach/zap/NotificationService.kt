@@ -1,10 +1,17 @@
 package com.octopusbeach.zap
 
+import android.app.Notification
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
+import android.support.v4.app.NotificationCompat
 import android.util.Base64
 import android.util.Log
 import com.firebase.client.DataSnapshot
@@ -95,5 +102,23 @@ class NotificationService : NotificationListenerService() {
 
     override fun onNotificationRemoved(sbn: StatusBarNotification?) {
         super.onNotificationRemoved(sbn)
+    }
+
+    private fun createRatingNotification() {
+        // after 30 notifications have been served, ask for a review!
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("market://details?id=com.octopusbeach.zap")
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
+        val builder = NotificationCompat.Builder(applicationContext)
+        val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+        builder.setLargeIcon(largeIcon)
+            .setContentTitle("Like Zap?")
+            .setContentText("Rate us in the app store!")
+            .setSmallIcon(R.drawable.notification)
+        builder.setContentIntent(pendingIntent)
+        val note = builder.build()
+        note.flags = Notification.FLAG_AUTO_CANCEL
+        (getSystemService(NOTIFICATION_SERVICE) as NotificationManager).notify(0, note)
     }
 }
