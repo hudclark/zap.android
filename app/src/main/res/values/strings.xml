@@ -15,4 +15,6 @@
     <string name="go_to_settings">Go to settings</string>
     <string name="get_extension">Download the browser extension</string>
     <string name="extension_description">Search for Zap on the Chrome Web Store and add it as an extension. Firefox support coming soon!</string>
+    <string name="rating_title">Like Zap?</string>
+    <string name="rating_text">Rate us in the Play Store!</string>
 </resources>

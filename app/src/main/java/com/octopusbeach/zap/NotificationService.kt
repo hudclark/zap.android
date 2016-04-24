@@ -25,14 +25,21 @@ import java.io.ByteArrayOutputStream
  * Created by hudson on 4/10/16.
  */
 class NotificationService : NotificationListenerService() {
-    private lateinit var context: Context
     private val TITLE = "android.title"
     private val TEXT = "android.text"
     private val EMPTY_VIBRATE = longArrayOf(0)
     private val ANDROID = "android"
     private val NOTIFICATION_COUNT = "note_count"
     private val SHOWN_NOTIFICATION = "shown"
+    private val PRESENCE_REF = "/presence/"
+    private val ICON_REF = "/icons/"
+    private val NOTIFICATION_CHILD = "notifications/"
+    private val MARKET_URI = "market://details?id=com.octopusbeach.zap"
+    private val TITLE_KEY = "title"
+    private val TEXT_KEY = "text"
+    private val APP_KEY = "app"
 
+    private lateinit var context: Context
     private var askedForRating = false
     private var notificationsServed = 0
 
@@ -87,15 +94,14 @@ class NotificationService : NotificationListenerService() {
     private fun pushNote(title: String, text: String, safePackageName:String) {
         val ref = (context as ZapApplication).getRef()
         val uid = ref.auth?.uid ?: return
-        //TODO create a single listener for presence that starts/stop with service lifecycle.
-        Firebase(ZapApplication.FIREBASE_ROOT + "/presence/" + uid).
+        Firebase(ZapApplication.FIREBASE_ROOT + PRESENCE_REF + uid).
                 addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (snapshot.exists()) {
                             // logged into chrome
-                            val noteRef = ref.child("notifications/" + uid)
-                            noteRef.push().setValue(mapOf(Pair("title", title), Pair("text", text),
-                                    Pair("app", safePackageName)))
+                            val noteRef = ref.child(NOTIFICATION_CHILD + uid)
+                            noteRef.push().setValue(mapOf(Pair(TITLE_KEY, title), Pair(TEXT_KEY, text),
+                                    Pair(APP_KEY, safePackageName)))
                         }
                     }
 
@@ -107,7 +113,7 @@ class NotificationService : NotificationListenerService() {
 
     private fun push(packageName: String, title:String, text:String) {
         val safeName = packageName.split('.').joinToString("")
-        val iconRef = Firebase(ZapApplication.FIREBASE_ROOT + "/icons/" + safeName)
+        val iconRef = Firebase(ZapApplication.FIREBASE_ROOT + ICON_REF + safeName)
         iconRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 // If the image has never been saved for this app, send it over now
@@ -146,14 +152,14 @@ class NotificationService : NotificationListenerService() {
         edit.apply()
 
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse("market://details?id=com.octopusbeach.zap")
+        intent.data = Uri.parse(MARKET_URI)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
         val largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         val builder = NotificationCompat.Builder(context)
         builder.setLargeIcon(largeIcon)
-            .setContentTitle("Like Zap?")
-            .setContentText("Rate us in the app store!")
+            .setContentTitle(getString(R.string.rating_title))
+            .setContentText(getString(R.string.rating_text))
             .setSmallIcon(R.drawable.notification)
         builder.setContentIntent(pendingIntent)
         val note = builder.build()
