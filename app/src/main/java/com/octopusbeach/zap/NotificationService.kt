@@ -69,9 +69,10 @@ class NotificationService : NotificationListenerService() {
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         val extras = validate(sbn)
         if (extras != null) {
-            val text = extras.get(TEXT).toString()
+            val text = extras.get(TEXT)?.toString()
             val title = extras.getString(TITLE)
-            push(sbn!!.packageName, title, text)
+            if (text != null && title != null)
+                push(sbn!!.packageName, title, text)
         }
     }
 
